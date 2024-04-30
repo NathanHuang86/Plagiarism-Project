@@ -50,7 +50,7 @@ def run_plagiarism_analysis(query_text, data, plagiarism_threshold=0.8):
     data["similarity"] = data["vectors"].apply(lambda x: cosine_similarity(query_vect, x))
     data["similarity"] = data["similarity"].apply(lambda x: x[0][0])
 
-    similar_articles = data.sort_values(by='similarity', ascending=False)[1:top_N+1]
+    similar_articles = data.sort_values(by='similarity', ascending=False)[0:top_N+1]
     formated_result = similar_articles[["abstract", "paper_id", "similarity"]].reset_index(drop = True)
 
     similarity_score = formated_result.iloc[0]["similarity"]
