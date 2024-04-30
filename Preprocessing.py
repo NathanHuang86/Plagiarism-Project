@@ -10,12 +10,10 @@ def preprocess_data(data_path, sample_size):
   data = data.dropna(subset = ['abstract']).reset_index(drop = True)
 
   # Get "sample_size" random articles
-  data = data.sample(sample_size)[['abstract']]
+  data = data.sample(sample_size)[['abstract', 'paper_id']]
   
   return data
 
 # Read data & preprocess it
 data_path = "./document/source_data.csv"
 source_data = preprocess_data(data_path, 5)
-
-source_data.sample(5)

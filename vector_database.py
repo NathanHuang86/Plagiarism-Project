@@ -20,8 +20,8 @@ def create_vector_database(data):
    data["vectors"] = vectors
    data["vectors"] = data["vectors"].apply(lambda emb: np.array(emb))
    data["vectors"] = data["vectors"].apply(lambda emb: emb.reshape(1, -1))
+   
    return data
 
 # Create the vector index
 vector_database = create_vector_database(source_data)
-vector_database.sample(5)

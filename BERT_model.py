@@ -2,7 +2,7 @@
 from preprocessing import *
 import numpy as np
 import torch
-from keras.utils import pad_sequences
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 from transformers import BertTokenizer,  AutoModelForSequenceClassification
  
 # Load bert model
@@ -18,26 +18,28 @@ model.to(device)
  
 def create_vector_from_text(tokenizer, model, text, MAX_LEN = 510):
   
-    input_ids = tokenizer.encode(
-                        text,
-                        add_special_tokens = True,
-                        max_length = MAX_LEN,                          
-    )   
-    results = pad_sequences([input_ids], maxlen=MAX_LEN, dtype="long",
-                              truncating="post", padding="post")
+    input_ids = tokenizer.encode(text, add_special_tokens = True, max_length = MAX_LEN)   
+
+    results = pad_sequences([input_ids], maxlen=MAX_LEN, dtype="long", truncating="post", padding="post")
+
     # Remove the outer list.
     input_ids = results[0]
+
     # Create attention masks   
     attention_mask = [int(i>0) for i in input_ids]
+
     # Convert to tensors.
     input_ids = torch.tensor(input_ids)
     attention_mask = torch.tensor(attention_mask)
+
     # Add an extra dimension for the "batch" (even though there is only one
     # input in this batch.)
     input_ids = input_ids.unsqueeze(0)
     attention_mask = attention_mask.unsqueeze(0)
+
     # Put the model in "evaluation" mode, meaning feed-forward operation.
     model.eval()
+    
     # Run the text through BERT, and collect all of the hidden states produced
     # from all 12 layers.
     with torch.no_grad():       
