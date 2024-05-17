@@ -1,11 +1,13 @@
 from plagarism_analysis import *
 
-english_article_to_check = "Thus, for the vast majority of readers, the paper does not exist beyond its abstract. For the referees, and the few readers who wish to read beyond the abstract, the abstract sets the tone for the rest of the paper. It is therefore the duty of the author to ensure that the abstract is properly representative of the entire paper. For this, the abstract must have some general qualities. These are listed in Table 1."
+english_article_to_check = "Ainsi, pour la grande majorité des lecteurs, l’article n’existe pas au-delà de son résumé. Pour les évaluateurs et les quelques lecteurs qui souhaitent lire au-delà du résumé, le résumé donne le ton au reste de l'article. Il est donc du devoir de l'auteur de s'assurer que le résumé est correctement représentatif de l'ensemble de l'article. Pour cela, le résumé doit posséder quelques qualités générales. Ceux-ci sont répertoriés dans le tableau 1."
 
 # Select an existing article from the data
-new_incoming_text = source_data.iloc[0]['abstract']
+new_incoming_text = source_data.iloc[2]['abstract']
  
 # Run the plagiarism detection
-analysis_result = run_plagiarism_analysis(new_incoming_text, vector_database, plagiarism_threshold=0.8)
+database_document = run_plagiarism_analysis(new_incoming_text, vector_database, plagiarism_threshold=0.2)
+random_document = run_plagiarism_analysis(english_article_to_check, vector_database, plagiarism_threshold=0.2)
 
-print(analysis_result)
+print(database_document)
+print(random_document)

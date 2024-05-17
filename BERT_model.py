@@ -18,7 +18,7 @@ model.to(device)
  
 def create_vector_from_text(tokenizer, model, text, MAX_LEN = 510):
   
-    input_ids = tokenizer.encode(text, add_special_tokens = True, max_length = MAX_LEN)   
+    input_ids = tokenizer.encode(text, add_special_tokens = True, max_length = MAX_LEN)
 
     results = pad_sequences([input_ids], maxlen=MAX_LEN, dtype="long", truncating="post", padding="post")
 

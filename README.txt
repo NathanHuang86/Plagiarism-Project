@@ -7,6 +7,7 @@ pip install transformers
 pip install langdetect
 pip install sentencepiece
 pip install scikit-learn
+pip install tensorflow
 
 Order of abstract level:
 preprocessing > BERT_model > vector_database > machine_translation > plagiarism_analysis > run

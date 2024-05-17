@@ -2,7 +2,7 @@ import pandas as pd
 from tqdm import tqdm
 
 def preprocess_data(data_path, sample_size):
- 
+  
   # Read the data from specific path
   data = pd.read_csv(data_path, low_memory=False, encoding="utf-8")
 
